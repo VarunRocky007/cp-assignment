@@ -1,0 +1,30 @@
+name: cross_platform_assignment
+description: "Cross Platform Assignment"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  parse_server_sdk_flutter: ^9.0.0
+  auto_route: ^7.8.4
+  flutter_dotenv: ^5.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  auto_route_generator: ^7.1.1
+  flutter_lints: ^5.0.0
+  build_runner: any
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
