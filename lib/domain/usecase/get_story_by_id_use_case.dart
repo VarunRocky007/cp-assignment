@@ -8,7 +8,7 @@ class GetStoryByIdUseCase {
   GetStoryByIdUseCase({StoryRepository? repository})
       : _repository = repository ?? StoryRepositoryImpl();
 
-  Future<ParseObject?> call(String objectId) async {
+  Future<ParseObject?> execute(String objectId) async {
     return await _repository.getStoryById(objectId);
   }
 }

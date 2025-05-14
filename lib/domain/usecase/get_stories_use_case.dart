@@ -8,7 +8,7 @@ class GetStoriesUseCase {
   GetStoriesUseCase({StoryRepository? repository})
       : _repository = repository ?? StoryRepositoryImpl();
 
-  Future<List<ParseObject>> call() async {
+  Future<List<ParseObject>> execute() async {
     return await _repository.readStories();
   }
 }
