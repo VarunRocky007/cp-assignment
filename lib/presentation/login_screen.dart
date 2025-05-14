@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cross_platform_assignment/domain/usecase/login_use_case.dart';
 import 'package:cross_platform_assignment/navigation/app_router.gr.dart';
