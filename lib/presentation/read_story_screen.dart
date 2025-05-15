@@ -106,9 +106,9 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
   }
 
   void navigateToHome() {
-    context.router.replaceAll([
-      const HomeRoute(),
-    ]);
+    context.router.pushAndPopUntil(
+      const HomeRoute(), predicate: (Route<dynamic> route) => false,
+    );
   }
 
 
@@ -116,7 +116,7 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Read Story"),
+        title: const Text("Story"),
         actions: [
           IconButton(
             icon: const Icon(Icons.delete),
@@ -150,7 +150,7 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
             TextField(
               controller: _contentController,
               readOnly: !_isEditMode,
-              maxLines: 10,
+              maxLines: 25,
               decoration: InputDecoration(
                 labelText: 'Content',
                 border: const OutlineInputBorder(),

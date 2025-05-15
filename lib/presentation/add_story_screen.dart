@@ -62,9 +62,9 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
   }
 
   void navigateToHome() {
-    context.router.replaceAll([
-      const HomeRoute(),
-    ]);
+    context.router.pushAndPopUntil(
+      const HomeRoute(), predicate: (Route<dynamic> route) => false,
+    );
   }
 
 
@@ -80,11 +80,18 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(labelText: "Title"),
+              decoration: InputDecoration(
+                labelText: 'Title',
+                border: const OutlineInputBorder(),
+              ),
             ),
             TextField(
               controller: _contentController,
-              decoration: const InputDecoration(labelText: "Content"),
+              maxLines: 25,
+              decoration: InputDecoration(
+                labelText: 'Content',
+                border: const OutlineInputBorder(),
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

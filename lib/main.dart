@@ -17,16 +17,17 @@ void main() async {
     autoSendSessionId: true,
   );
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter _appRouter = AppRouter();
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: AppRouter().config(),
+      routerConfig: _appRouter.config(),
     );
   }
 }
