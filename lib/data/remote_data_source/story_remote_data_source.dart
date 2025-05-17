@@ -1,19 +1,20 @@
+import 'package:cross_platform_assignment/app_constants.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class StoryRemoteDataSource {
   Future<List<ParseObject>> readStories() async {
     final QueryBuilder<ParseObject> queryBuilder =
         QueryBuilder<ParseObject>(ParseObject('Story'))
+          ..whereEqualTo("author", AppConstants.loggedInUser?.objectId ?? "")
           ..orderByDescending('createdAt');
 
     final ParseResponse apiResponse = await queryBuilder.query();
 
-
     if (apiResponse.success && apiResponse.results != null) {
       return apiResponse.results as List<ParseObject>;
     } else {
-      if(apiResponse.success) {
-        if(apiResponse.results == null) {
+      if (apiResponse.success) {
+        if (apiResponse.results == null) {
           return [];
         }
       }
@@ -22,9 +23,13 @@ class StoryRemoteDataSource {
   }
 
   Future<bool> createStory(String title, String content) async {
+    if (AppConstants.loggedInUser == null) {
+      return false;
+    }
     final ParseObject story = ParseObject('Story')
       ..set('title', title)
-      ..set('content', content);
+      ..set('content', content)
+      ..set('author', AppConstants.loggedInUser?.objectId ?? "");
 
     final ParseResponse apiResponse = await story.save();
 

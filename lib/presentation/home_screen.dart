@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cross_platform_assignment/domain/usecase/get_stories_use_case.dart';
+import 'package:cross_platform_assignment/domain/usecase/logout_use_case.dart';
 import 'package:cross_platform_assignment/navigation/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late GetStoriesUseCase _getStoriesUseCase;
+  late LogoutUseCase _logoutUseCase;
   bool _isLoading = false;
   List<ParseObject> _stories = [];
   bool _isError = false;
@@ -22,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _getStoriesUseCase = GetStoriesUseCase();
+    _logoutUseCase = LogoutUseCase();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _fetchStories();
     });
@@ -62,6 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Stories"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              context.router.push(AddStoryRoute());
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: ()  {
+              _logoutUseCase.execute();
+              context.router.replaceAll([const LoginRoute()]);
+            },
+          ),
+        ],
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
