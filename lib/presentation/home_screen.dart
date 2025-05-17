@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: ()  {
+            onPressed: () {
               _logoutUseCase.execute();
               context.router.replaceAll([const LoginRoute()]);
             },
@@ -124,9 +124,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             );
                           },
-                          child: ListTile(
-                            title: Text(
-                              story.get<String>('title') ?? '',
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 16),
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Title: ${story.get<String>('title') ?? ''}",
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Text(
+                                        "createdOn: ${story.get<DateTime>('createdAt')?.toLocal().toString() ?? ''}"),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         );

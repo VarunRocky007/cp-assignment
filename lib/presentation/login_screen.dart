@@ -56,44 +56,61 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _usernameEmailController,
-              decoration: InputDecoration(labelText: 'Username or Email'),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _loginUser,
-              child: _isLoading ? CircularProgressIndicator() : Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.router.push(RegistrationRoute());
-              },
-              child: Text('Register new user'),
-            ),
-            if (_error.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  _error,
-                  style: TextStyle(color: Colors.red),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(36.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Story Diaries",
+                style: TextStyle(
+                  fontSize: 46.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
-          ],
+              SizedBox(height: 256.0),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextField(
+                    controller: _usernameEmailController,
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  TextField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                    ),
+                  ),
+                  SizedBox(height: 24.0),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: _isLoading ? null : _loginUser,
+                child: _isLoading ? CircularProgressIndicator() : Text('Login'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.router.push(RegistrationRoute());
+                },
+                child: Text('Register new user'),
+              ),
+              if (_error.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text(
+                    _error,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

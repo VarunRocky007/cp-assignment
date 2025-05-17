@@ -85,6 +85,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
                 border: const OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 16),
             TextField(
               controller: _contentController,
               maxLines: 25,
